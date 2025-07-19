@@ -1,3 +1,4 @@
+using book_api.Application.Book.Command;
 using book_api.Application.Book.Commands;
 using book_api.Application.Book.Query;
 using book_api.Infraestructure;

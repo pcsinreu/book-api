@@ -1,23 +1,31 @@
 ﻿using book_api.Application.Book.Commands;
+using book_api.Domain;
 using book_api.Infraestructure;
 using book_api.Interface.Input;
 
-public class BookCommandService : IBookCommandService
+namespace book_api.Application.Book.Command
 {
-    private readonly IBookInfrastructure _bookInfrastructure;
-
-    public BookCommandService(IBookInfrastructure bookInfrastructure)
+    public class BookCommandService : IBookCommandService
     {
-        _bookInfrastructure = bookInfrastructure;
-    }
+        private readonly IBookInfrastructure _bookInfrastructure;
 
-    public Task<Guid> CreateBookAsync(BookInput bookInput)
-    {
-        return _bookInfrastructure.SaveBookAsync(bookInput);
-    }
+        public BookCommandService(IBookInfrastructure bookInfrastructure)
+        {
+            _bookInfrastructure = bookInfrastructure;
+        }
 
-    public Task<bool> UpdateBookAsync(Guid id, BookInput bookInput)
-    {
-        return _bookInfrastructure.UpdateBookAsync(id, bookInput);
+        public async Task<Guid> CreateBookAsync(BookInput bookInput)
+        {
+            var authors = bookInput.Authors.ConvertAll(a => new Author(a.FirstName, a.LastName));
+            var book = new book_api.Domain.Book(Guid.NewGuid(), bookInput.Title, bookInput.PublishDate, authors);
+            return await _bookInfrastructure.SaveBookAsync(bookInput);
+        }
+
+        public async Task<bool> UpdateBookAsync(Guid id, BookInput bookInput)
+        {
+            var authors = bookInput.Authors.ConvertAll(a => new Author(a.FirstName, a.LastName));
+            var book = new book_api.Domain.Book(id, bookInput.Title, bookInput.PublishDate, authors);
+            return await _bookInfrastructure.UpdateBookAsync(id, bookInput);
+        }
     }
 }
