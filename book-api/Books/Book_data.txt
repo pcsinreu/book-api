@@ -1,0 +1,19 @@
+Title: El Quijote
+PublishDate: 2025-07-18
+Authors:
+- Miguel
+- Juan
+Id: 8a1ab4b3-f076-415a-a28a-0518cf1ed64e
+Title: El Quijote
+PublishDate: 2025-07-18
+Authors:
+- Miguel de Cervantes
+- Juan Pérez
+
+Id: 7a0b1623-c12b-4b9a-b587-55d7d0b575ae
+Title: El Quijote
+PublishDate: 2025-07-18
+Authors:
+- Miguel de Cervantes
+- Juan Pérez
+
