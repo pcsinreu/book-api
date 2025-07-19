@@ -27,6 +27,26 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<Cr
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend", policy =>
+    {
+        policy.WithOrigins("http://localhost:5178")
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -34,6 +54,8 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }   
+
+app.UseCors("AllowAll");
 
 app.UseHttpsRedirection();
 
