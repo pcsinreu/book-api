@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using book_api.Interface.Input;
 using book_api.Application.Book.Commands;
 
-namespace book_api_testing.Application
+namespace book_api_testing.Application  
 {
     public class BookCommandServiceTests
     {
